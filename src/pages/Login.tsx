@@ -26,7 +26,10 @@ export default function Login() {
     try {
       const user = await login(form.email, form.password);
       if (user && user.role === 'admin') {
-        window.open('http://localhost:3001', '_blank');
+        // Open the deployed admin dashboard (override with REACT_APP_ADMIN_URL for local dev)
+        const adminUrl =
+          process.env.REACT_APP_ADMIN_URL || 'https://bookstore-admin-zfwi.onrender.com';
+        window.open(adminUrl, '_blank');
       }
       navigate('/profile');
     } catch (err) {
